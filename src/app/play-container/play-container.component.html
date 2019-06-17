@@ -1,3 +1,11 @@
-<p>
-  play-container works!
-</p>
+<div id="container">
+  <app-game-screen></app-game-screen>
+  <app-scoreboard></app-scoreboard>
+  <div id="div-typingarea">
+    <label>
+      <input placeholder="여기에 입력하세요!" readonly id="input-typing"/>
+      <!-- TODO: input에 focus 주자 -->
+    </label>
+    <button id="button-starter" routerLink="/main">STOP</button>
+  </div>
+</div>

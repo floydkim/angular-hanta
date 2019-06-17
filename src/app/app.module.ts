@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainContainerComponent } from './main-container/main-container.component';
 import { PlayContainerComponent } from './play-container/play-container.component';
+import { GameScreenComponent } from './game-screen/game-screen.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainContainerComponent,
-    PlayContainerComponent
+    PlayContainerComponent,
+    GameScreenComponent,
+    ScoreboardComponent
   ],
   imports: [
     BrowserModule,
