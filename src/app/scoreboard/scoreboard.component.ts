@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-const INITIAL_SCORE = 5;
+import { ScoreService } from '../score.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-scoreboard',
@@ -8,13 +8,21 @@ const INITIAL_SCORE = 5;
   styleUrls: ['./scoreboard.component.css']
 })
 export class ScoreboardComponent implements OnInit {
+
+  score$: Observable<number>;
   score: number;
 
-  constructor() {
-    this.score = INITIAL_SCORE;
+  constructor(public scoreService: ScoreService) {
   }
 
   ngOnInit() {
+    // this.getScore();
   }
+
+  // getScore() {
+  //   this.scoreService.getScore().subscribe(value => {
+  //     this.score = value;
+  //   });
+  // }
 
 }

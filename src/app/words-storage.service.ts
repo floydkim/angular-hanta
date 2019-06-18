@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { WordComponent } from './word/word.component';
 import { interval } from 'rxjs';
 
-import { Word } from './types-definition';
+import { IWord } from './types-definition';
+import { ScoreService } from './score.service';
 
 
 const dictionary = ['맥북', '한글', '윈도우', '후보', '앵귤러', '사과', '바나나', '수박', '커피', '아이스아메리카노', '자바칩프라푸치노', '리듬', '두뇌', '마술', '피아노', '기타', '베이스', '훈민정음', '이름'];
@@ -14,16 +15,20 @@ const CREATE_RATE = 1000;
   providedIn: 'root'
 })
 export class WordsStorageService {
-  words: Word[];
+  words: IWord[];
   removeTarget: string;
   id: number;
 
-  constructor() {
+  constructor(private scoreService: ScoreService) {
     this.id = -1;
     this.words = [];
     const wordMaker = interval(CREATE_RATE);
-    wordMaker.subscribe(val => {
+    const subscription = wordMaker.subscribe(val => {
       this.updateWords();
+      if (!this.scoreService.score) {
+        subscription.unsubscribe();
+        this.words = [];
+      }
       console.log(val, '(WSS) interval', this.words, Object.keys(this.words).length);
     });
   }
@@ -36,6 +41,7 @@ export class WordsStorageService {
     for (const word of this.words) {
       if (word.alive && word.text === value) {
         word.alive = false;
+        this.scoreService.increase();
         break;
       }
     }

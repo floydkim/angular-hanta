@@ -1,5 +1,5 @@
 <span
-  *ngIf="word.alive"
+  *ngIf="word.alive && scoreService.score"
   class="span-word"
   [style.left.px]="xpos"
   [style.top.px]="ypos">

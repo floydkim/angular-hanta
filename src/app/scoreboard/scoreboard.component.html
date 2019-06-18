@@ -1,4 +1,5 @@
 <div id="div-scoreboard">
-  <p *ngIf="score > 0">점수: {{score}}</p>
-  <p *ngIf="score <= 0">Game Over</p>
+  <p *ngIf="scoreService.score > 0">점수: {{scoreService.score}}</p>
+  <p *ngIf="scoreService.score <= 0">Game Over</p>
+  <!-- <p>{{scoreService.score}}</p> -->
 </div>

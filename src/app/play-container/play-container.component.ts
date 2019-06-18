@@ -9,7 +9,8 @@ import { WordsStorageService } from '../words-storage.service';
 export class PlayContainerComponent implements OnInit {
   input: string;
 
-  constructor(private wordsStorageService: WordsStorageService) {
+  constructor(
+    private wordsStorageService: WordsStorageService) {
     this.input = '';
   }
 
@@ -19,7 +20,6 @@ export class PlayContainerComponent implements OnInit {
 
   onEnter(event: KeyboardEvent, value: string) {
     if (event.keyCode === 13 && value !== '') {
-      this.input = value;
       this.wordsStorageService.deleteWord(value);
       this.input = '';
       console.log('after enter', this.wordsStorageService.getWords());

@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { ScoreService } from '../score.service';
 
-import { Word } from '../types-definition';
+import { IWord } from '../types-definition';
 
 const INVADE_INTERVAL = 1000;
 const INVADE_HOP = 60;
@@ -12,17 +13,15 @@ const INVADE_HOP = 60;
 })
 export class WordComponent implements OnInit, OnDestroy {
 
-  @Input() word: Word;
+  @Input() word: IWord;
 
   xpos: number;
   ypos: number;
-  // alive: boolean;
   invadeSubscrption: Subscription;
 
-  constructor() {
+  constructor(public scoreService: ScoreService) {
     this.xpos = Math.trunc(Math.random() * 350); // 랜덤 x위치
     this.ypos = 0;
-    // this.alive = true;
   }
 
   ngOnInit() {
@@ -30,7 +29,6 @@ export class WordComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.alive = false;
     this.word.alive = false;
     this.invadeSubscrption.unsubscribe();
     console.log('WORD DESTROYED!!!', this.word);
@@ -43,6 +41,7 @@ export class WordComponent implements OnInit, OnDestroy {
         // TODO: ypos말고 렌더된 엘리먼트의 바닥 좌표를 계산해서 기준삼아야함
         // 아니면 선 넘어가도 안보이게 잘 가리던지
         this.ngOnDestroy();
+        this.scoreService.decrease();
       }
       this.ypos += INVADE_HOP;
     });
