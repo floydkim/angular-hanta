@@ -8,7 +8,7 @@
           #inputbox
           type="text"
           [(ngModel)]="input"
-          (keydown)="onEnter($event, inputbox.value)"
+          (keyup)="onEnter($event, inputbox.value)"
           placeholder="여기에 입력하세요!"
           id="input-typing"
           autofocus
