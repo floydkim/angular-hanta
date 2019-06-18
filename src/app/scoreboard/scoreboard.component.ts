@@ -16,13 +16,5 @@ export class ScoreboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getScore();
   }
-
-  // getScore() {
-  //   this.scoreService.getScore().subscribe(value => {
-  //     this.score = value;
-  //   });
-  // }
-
 }

@@ -9,8 +9,9 @@
         [(ngModel)]="input"
         (keydown)="onEnter($event, inputbox.value)"
         placeholder="여기에 입력하세요!"
-        id="input-typing"/>
-      <!-- TODO: input에 focus 주자 -->
+        id="input-typing"
+        autofocus
+        style="ime-mode: active"/>
     </label>
     <button id="button-starter" routerLink="/main">STOP</button>
   </div>

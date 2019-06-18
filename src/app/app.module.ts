@@ -9,6 +9,9 @@ import { PlayContainerComponent } from './play-container/play-container.componen
 import { GameScreenComponent } from './game-screen/game-screen.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { WordComponent } from './word/word.component';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
+import { IAppState, rootReducer, INITIAL_STATE } from '../store';
+import { ScoreActions } from './app.actions';
 
 @NgModule({
   declarations: [
@@ -22,9 +25,14 @@ import { WordComponent } from './word/word.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgReduxModule
   ],
-  providers: [],
+  providers: [ScoreActions],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+  }
+}

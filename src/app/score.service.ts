@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-
-const INITIAL_SCORE = 5;
+import { NgRedux } from '@angular-redux/store';
+import { ScoreActions } from './app.actions';
+import { IAppState } from '../store';
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +10,24 @@ const INITIAL_SCORE = 5;
 export class ScoreService {
 
   score: number;
+  subscription;
 
-  constructor() {
-    this.score = INITIAL_SCORE;
-  }
-
-  getScore(): Observable<number> {
-    return of(this.score);
-  }
-
-  decrease(): void {
-    this.score -= 1;
-    console.log('LOST SCORE!', this.score);
+  constructor(
+    private ngRedux: NgRedux<IAppState>,
+    private actions: ScoreActions,
+  ) {
+    this.subscription = ngRedux
+      .select<number>('score')
+      .subscribe(newScore => (this.score = newScore));
   }
 
   increase(): void {
-    this.score += 1;
-    console.log('GOT SCORE!', this.score);
+    this.ngRedux.dispatch(this.actions.increase());
+    console.log('GOT SCORE!', this.ngRedux.getState().score, this.score);
+  }
+
+  decrease(): void {
+    this.ngRedux.dispatch(this.actions.decrease());
+    console.log('LOST SCORE!', this.ngRedux.getState().score, this.score);
   }
 }
