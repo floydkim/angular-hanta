@@ -7,8 +7,7 @@ import { IAppState } from '../../store';
 
 @Component({
   selector: 'app-play-container',
-  templateUrl: './play-container.component.html',
-  styleUrls: ['./play-container.component.css']
+  templateUrl: './play-container.component.html'
 })
 export class PlayContainerComponent implements OnInit {
   input: string;
@@ -21,12 +20,12 @@ export class PlayContainerComponent implements OnInit {
     private scoreService: ScoreService
   ) {
     this.input = '';
-    this.subscription = this.ngRedux
-    .select<number>('score')
-    .subscribe(newScore => (this.isPlaying = newScore > 0));
   }
 
   ngOnInit() {
+    this.subscription = this.ngRedux
+      .select<number>('score')
+      .subscribe(newScore => (this.isPlaying = newScore > 0));
     console.log('play-container initial', this.wordsStorageService.getWords());
     this.scoreService.init();
   }

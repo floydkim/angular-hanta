@@ -29,7 +29,7 @@ export function rootReducer(lastState: IAppState, action: Action): IAppState {
     case DifficultyActions.INCREASE_CREATION:
       return { ...lastState, creationRate: 500 };
     case DifficultyActions.INCREASE_MOVE:
-      return { ...lastState, moveInterval: 500 };
+      return { ...lastState, moveInterval: 100 };
     case DifficultyActions.INCREASE_HOP:
       return { ...lastState, invasionHop: 90 };
 
@@ -38,7 +38,7 @@ export function rootReducer(lastState: IAppState, action: Action): IAppState {
     case DifficultyActions.DECREASE_MOVE:
       return { ...lastState, moveInterval: 2000 };
     case DifficultyActions.DECREASE_HOP:
-      return { ...lastState, invasionHop: 15 };
+      return { ...lastState, invasionHop: 60 };
   }
 
   return lastState;

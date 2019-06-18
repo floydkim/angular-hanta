@@ -25,7 +25,7 @@ export class WordComponent implements OnInit, OnDestroy {
     private ngRedux: NgRedux<IAppState>,
     private actions: DifficultyActions,
   ) {
-    this.xpos = Math.trunc(Math.random() * 310); // 랜덤 x위치
+    this.xpos = Math.trunc(Math.random() * 310);
     this.ypos = 0;
   }
 
@@ -51,8 +51,6 @@ export class WordComponent implements OnInit, OnDestroy {
         this.ngOnDestroy();
       }
       if (this.ypos >= 350) {
-        // TODO: ypos말고 렌더된 엘리먼트의 바닥 좌표를 계산해서 기준삼아야함
-        // 아니면 선 넘어가도 안보이게 잘 가리던지
         this.ngOnDestroy();
         this.scoreService.decrease();
       }

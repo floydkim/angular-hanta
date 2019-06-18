@@ -5,19 +5,13 @@ import { ScoreActions } from './app.actions';
 import { IAppState } from '../store';
 import { IWord } from './types-definition';
 import { ScoreService } from './score.service';
-
-
-const dictionary = ['맥북', '한글', '윈도우', '후보', '앵귤러',
-  '사과', '바나나', '수박', '커피', '화분',
-  '파인애플', '리듬', '두뇌', '마술', '피아노', '기타',
-  '베이스', '훈민정음', '이름'];
+import { dictionary } from './word-dictionary';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WordsStorageService {
   words: IWord[];
-  removeTarget: string;
   id: number;
   isPlaying: boolean;
   subscription: Subscription;
@@ -60,9 +54,9 @@ export class WordsStorageService {
 
   makeWords() {
     const CREATION_RATE = this.ngRedux.getState().creationRate;
-    const wordMaker = interval(CREATION_RATE);
-
     this.isPlaying = this.ngRedux.getState().score > 0;
+
+    const wordMaker = interval(CREATION_RATE);
     const subscription = wordMaker.subscribe(val => {
       if (!this.isPlaying) {
         this.words.forEach(word => {
