@@ -1,0 +1,17 @@
+.p-gameover {
+  background-color: rgb(255, 155, 155);
+  box-shadow: 0px 0px 3px 2px rgb(255, 155, 155);
+  animation: fadein;
+  animation-duration: 1s;
+}
+
+@keyframes fadein {
+  from {
+    background-color: transparent;
+    box-shadow: 0px 0px 3px 2px transparent;
+  }
+  to {
+    background-color: rgb(255, 155, 155);
+    box-shadow: 0px 0px 3px 2px rgb(255, 155, 155);
+  }
+}

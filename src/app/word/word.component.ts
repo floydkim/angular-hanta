@@ -25,7 +25,7 @@ export class WordComponent implements OnInit, OnDestroy {
     private ngRedux: NgRedux<IAppState>,
     private actions: DifficultyActions,
   ) {
-    this.xpos = Math.trunc(Math.random() * 350); // 랜덤 x위치
+    this.xpos = Math.trunc(Math.random() * 310); // 랜덤 x위치
     this.ypos = 0;
   }
 

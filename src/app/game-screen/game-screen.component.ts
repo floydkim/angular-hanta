@@ -11,6 +11,7 @@ import { WordComponent } from '../word/word.component';
 export class GameScreenComponent implements OnInit {
 
   wordArray: any[];
+  isBlur: boolean;
 
   @ViewChildren(WordComponent) wordChildren: QueryList<WordComponent>;
 
@@ -23,7 +24,8 @@ export class GameScreenComponent implements OnInit {
 
   getWordInterval() {
     const wordGetter$ = interval (1000);
-    wordGetter$.subscribe(i => {
+    wordGetter$.subscribe(() => {
+      this.isBlur = true;
       this.wordArray = this.wordStorageService.getWords();
       // TODO: 서비스로부터 단어 어레이를 폴링하고있는데
       // 대신 서비스에서 주기적으로 emit하는 단어를 받아볼 수 있을까?
