@@ -23,7 +23,7 @@ export class GameScreenComponent implements OnInit {
 
   getWordInterval() {
     const wordGetter$ = interval (1000);
-    const subscriber = wordGetter$.subscribe(i => {
+    wordGetter$.subscribe(i => {
       this.wordArray = this.wordStorageService.getWords();
       // this.wordChildren.forEach(element => {
       //   console.log('', element.word);

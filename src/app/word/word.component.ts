@@ -16,13 +16,13 @@ export class WordComponent implements OnInit, OnDestroy {
 
   xpos: number;
   ypos: number;
-  alive: boolean;
+  // alive: boolean;
   invadeSubscrption: Subscription;
 
   constructor() {
     this.xpos = Math.trunc(Math.random() * 350); // 랜덤 x위치
     this.ypos = 0;
-    this.alive = true;
+    // this.alive = true;
   }
 
   ngOnInit() {
@@ -30,9 +30,10 @@ export class WordComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    // this.alive = false;
+    this.word.alive = false;
     this.invadeSubscrption.unsubscribe();
-    console.log('WORD DESTROYED!!!', this.word, this.alive, this.ypos);
+    console.log('WORD DESTROYED!!!', this.word);
   }
 
   invade() {
