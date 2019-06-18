@@ -8,8 +8,8 @@ import { ScoreService } from './score.service';
 
 
 const dictionary = ['맥북', '한글', '윈도우', '후보', '앵귤러',
-  '사과', '바나나', '수박', '커피', '아이스아메리카노',
-  '자바칩프라푸치노', '리듬', '두뇌', '마술', '피아노', '기타',
+  '사과', '바나나', '수박', '커피', '화분',
+  '파인애플', '리듬', '두뇌', '마술', '피아노', '기타',
   '베이스', '훈민정음', '이름'];
 
 @Injectable({
@@ -61,7 +61,7 @@ export class WordsStorageService {
   makeWords() {
     const CREATION_RATE = this.ngRedux.getState().creationRate;
     const wordMaker = interval(CREATION_RATE);
-    console.log('제발좀');
+
     this.isPlaying = this.ngRedux.getState().score > 0;
     const subscription = wordMaker.subscribe(val => {
       if (!this.isPlaying) {

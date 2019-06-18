@@ -29,8 +29,10 @@ export class ScoreActions {
 export class DifficultyActions {
   static INCREASE_CREATION = 'INCREASE_CREATION';
   static DECREASE_CREATION = 'DECREASE_CREATION';
-  static INCREATE_HOP = 'INCREASE_HOP';
+  static INCREASE_HOP = 'INCREASE_HOP';
   static DECREASE_HOP = 'DECREASE_HOP';
+  static INCREASE_MOVE = 'INCREASE_MOVE';
+  static DECREASE_MOVE = 'DECREASE_MOVE';
 
   creationRate = {
     increase(): Action {
@@ -43,10 +45,19 @@ export class DifficultyActions {
 
   invasionHop = {
     increase(): Action {
-      return { type: DifficultyActions.INCREATE_HOP };
+      return { type: DifficultyActions.INCREASE_HOP };
     },
     decrease(): Action {
       return { type: DifficultyActions.DECREASE_HOP };
+    }
+  };
+
+  moveInterval = {
+    increase(): Action {
+      return { type: DifficultyActions.INCREASE_MOVE };
+    },
+    decrease(): Action {
+      return { type: DifficultyActions.DECREASE_MOVE };
     }
   };
 }
