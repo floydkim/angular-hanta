@@ -26,7 +26,6 @@ export class PlayContainerComponent implements OnInit {
     this.subscription = this.ngRedux
       .select<number>('score')
       .subscribe(newScore => (this.isPlaying = newScore > 0));
-    console.log('play-container initial', this.wordsStorageService.getWords());
     this.scoreService.init();
   }
 
@@ -34,7 +33,6 @@ export class PlayContainerComponent implements OnInit {
     if (event.keyCode === 13 && value !== '') {
       this.wordsStorageService.deleteWord(value);
       this.input = '';
-      console.log('after enter', this.wordsStorageService.getWords());
     }
   }
 

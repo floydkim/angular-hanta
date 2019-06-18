@@ -30,14 +30,12 @@ export class WordComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('워드컴포넌트 초기화 !!!');
     this.invade();
   }
 
   ngOnDestroy() {
     this.word.alive = false;
     this.invadeSubscrption.unsubscribe();
-    console.log('WORD DESTROYED!!!', this.word);
   }
 
   invade() {

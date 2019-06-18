@@ -60,14 +60,12 @@ export class WordsStorageService {
     const subscription = wordMaker.subscribe(val => {
       if (!this.isPlaying) {
         this.words.forEach(word => {
-          console.log('flushing....', word);
           word.alive = false;
         });
         this.emptyWords();
         subscription.unsubscribe();
       }
       this.updateWords();
-      console.log(val, '(WSS) interval', this.words, Object.keys(this.words).length);
     });
   }
 
