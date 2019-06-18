@@ -39,7 +39,8 @@ div {
   height: 30px;
 }
 
-.game-screen {
+.div-game-screen {
   width: 100%;
   height: 400px;
+  position: relative;
 }

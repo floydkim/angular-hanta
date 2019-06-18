@@ -3,7 +3,13 @@
   <app-scoreboard></app-scoreboard>
   <div id="div-typingarea">
     <label>
-      <input placeholder="여기에 입력하세요!" readonly id="input-typing"/>
+      <input
+        #inputbox
+        type="text"
+        [(ngModel)]="input"
+        (keydown)="onEnter($event, inputbox.value)"
+        placeholder="여기에 입력하세요!"
+        id="input-typing"/>
       <!-- TODO: input에 focus 주자 -->
     </label>
     <button id="button-starter" routerLink="/main">STOP</button>
