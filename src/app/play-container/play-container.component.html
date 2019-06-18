@@ -13,6 +13,7 @@
         autofocus
         style="ime-mode: active"/>
     </label>
-    <button id="button-starter" routerLink="/main">STOP</button>
+    <button *ngIf="isPlaying" id="button-starter" routerLink="/main" (click)="onStop()">STOP</button>
+    <button *ngIf="!isPlaying" id="button-starter" (click)="onRestart()">RESTART</button>
   </div>
 </div>

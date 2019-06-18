@@ -21,13 +21,22 @@ export class ScoreService {
       .subscribe(newScore => (this.score = newScore));
   }
 
-  increase(): void {
+  init() {
+    this.ngRedux.dispatch(this.actions.init());
+    console.log('SCORE INITIALIZED!', this.ngRedux.getState().score, this.score);
+  }
+
+  increase() {
     this.ngRedux.dispatch(this.actions.increase());
     console.log('GOT SCORE!', this.ngRedux.getState().score, this.score);
   }
 
-  decrease(): void {
+  decrease() {
     this.ngRedux.dispatch(this.actions.decrease());
     console.log('LOST SCORE!', this.ngRedux.getState().score, this.score);
+  }
+
+  zero() {
+    this.ngRedux.dispatch(this.actions.zero());
   }
 }

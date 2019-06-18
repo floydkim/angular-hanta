@@ -3,8 +3,14 @@ import { Action } from 'redux';
 
 @Injectable()
 export class ScoreActions {
+  static INIT_SCORE = 'INIT_SCORE';
   static INCREASE_SCORE = 'INCREASE_SCORE';
   static DECREASE_SCORE = 'DECREASE_SCORE';
+  static ZERO_SCORE = 'ZERO_SCORE';
+
+  init(): Action {
+    return { type: ScoreActions.INIT_SCORE };
+  }
 
   increase(): Action {
     return { type: ScoreActions.INCREASE_SCORE };
@@ -12,6 +18,10 @@ export class ScoreActions {
 
   decrease(): Action {
     return { type: ScoreActions.DECREASE_SCORE };
+  }
+
+  zero(): Action {
+    return { type: ScoreActions.ZERO_SCORE };
   }
 }
 
@@ -24,19 +34,19 @@ export class DifficultyActions {
 
   creationRate = {
     increase(): Action {
-      return { type: DifficultyActions.INCREASE_CREATION }
+      return { type: DifficultyActions.INCREASE_CREATION };
     },
     decrease(): Action {
-      return { type: DifficultyActions.DECREASE_CREATION }
+      return { type: DifficultyActions.DECREASE_CREATION };
     }
   };
 
   invasionHop = {
     increase(): Action {
-      return { type: DifficultyActions.INCREATE_HOP }
+      return { type: DifficultyActions.INCREATE_HOP };
     },
     decrease(): Action {
-      return { type: DifficultyActions.DECREASE_HOP }
+      return { type: DifficultyActions.DECREASE_HOP };
     }
-  }
+  };
 }

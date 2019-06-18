@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { WordComponent } from './word/word.component';
-import { interval } from 'rxjs';
-
+import { interval, Subscription } from 'rxjs';
+import { NgRedux } from '@angular-redux/store';
+import { ScoreActions } from './app.actions';
+import { IAppState } from '../store';
 import { IWord } from './types-definition';
 import { ScoreService } from './score.service';
 
 
-const dictionary = ['맥북', '한글', '윈도우', '후보', '앵귤러', '사과', '바나나', '수박', '커피', '아이스아메리카노', '자바칩프라푸치노', '리듬', '두뇌', '마술', '피아노', '기타', '베이스', '훈민정음', '이름'];
-// const dictionary = ['단', '어'];
-
-const CREATE_RATE = 1000;
+const dictionary = ['맥북', '한글', '윈도우', '후보', '앵귤러',
+  '사과', '바나나', '수박', '커피', '아이스아메리카노',
+  '자바칩프라푸치노', '리듬', '두뇌', '마술', '피아노', '기타',
+  '베이스', '훈민정음', '이름'];
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +19,22 @@ export class WordsStorageService {
   words: IWord[];
   removeTarget: string;
   id: number;
+  isPlaying: boolean;
+  subscription: Subscription;
 
-  constructor(private scoreService: ScoreService) {
+  constructor(
+    private scoreService: ScoreService,
+    private ngRedux: NgRedux<IAppState>,
+    private actions: ScoreActions
+    ) {
     this.id = -1;
     this.words = [];
-    const wordMaker = interval(CREATE_RATE);
-    const subscription = wordMaker.subscribe(val => {
-      this.updateWords();
-      if (!this.scoreService.score) {
-        subscription.unsubscribe();
-        this.words = [];
-      }
-      console.log(val, '(WSS) interval', this.words, Object.keys(this.words).length);
-    });
+
+    // this.makeWords();
+
+    this.subscription = ngRedux
+      .select<number>('score')
+      .subscribe(newScore => (this.isPlaying = newScore > 0));
   }
 
   getWords() {
@@ -48,7 +52,32 @@ export class WordsStorageService {
   }
 
   updateWords() {
-    const randomIndex = Math.trunc(dictionary.length * Math.random());
-    this.words.push({ id: ++this.id, text: dictionary[randomIndex], alive: true });
+    if (this.isPlaying) {
+      const randomIndex = Math.trunc(dictionary.length * Math.random());
+      this.words.push({ id: ++this.id, text: dictionary[randomIndex], alive: true });
+    }
+  }
+
+  makeWords() {
+    const CREATION_RATE = this.ngRedux.getState().creationRate;
+    const wordMaker = interval(CREATION_RATE);
+    console.log('제발좀');
+    this.isPlaying = this.ngRedux.getState().score > 0;
+    const subscription = wordMaker.subscribe(val => {
+      if (!this.isPlaying) {
+        this.words.forEach(word => {
+          console.log('flushing....', word);
+          word.alive = false;
+        });
+        this.emptyWords();
+        subscription.unsubscribe();
+      }
+      this.updateWords();
+      console.log(val, '(WSS) interval', this.words, Object.keys(this.words).length);
+    });
+  }
+
+  emptyWords() {
+    this.words = [];
   }
 }

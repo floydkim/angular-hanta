@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WordsStorageService } from '../words-storage.service';
 
 @Component({
   selector: 'app-main-container',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainContainerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private wordStorageService: WordsStorageService) { }
 
   ngOnInit() {
   }
 
+  onStart() {
+    this.wordStorageService.makeWords();
+  }
 }

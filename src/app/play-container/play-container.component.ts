@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { WordsStorageService } from '../words-storage.service';
+import { ScoreService } from '../score.service';
+import { NgRedux } from '@angular-redux/store';
+import { IAppState } from '../../store';
 
 @Component({
   selector: 'app-play-container',
@@ -8,14 +12,23 @@ import { WordsStorageService } from '../words-storage.service';
 })
 export class PlayContainerComponent implements OnInit {
   input: string;
+  isPlaying: boolean;
+  subscription: Subscription;
 
   constructor(
-    private wordsStorageService: WordsStorageService) {
+    private ngRedux: NgRedux<IAppState>,
+    private wordsStorageService: WordsStorageService,
+    private scoreService: ScoreService
+  ) {
     this.input = '';
+    this.subscription = this.ngRedux
+    .select<number>('score')
+    .subscribe(newScore => (this.isPlaying = newScore > 0));
   }
 
   ngOnInit() {
-    console.log('initial', this.wordsStorageService.getWords());
+    console.log('play-container initial', this.wordsStorageService.getWords());
+    this.scoreService.init();
   }
 
   onEnter(event: KeyboardEvent, value: string) {
@@ -26,4 +39,13 @@ export class PlayContainerComponent implements OnInit {
     }
   }
 
+  onRestart() {
+    this.scoreService.init();
+    this.wordsStorageService.makeWords();
+  }
+
+  onStop() {
+    this.scoreService.zero();
+    this.wordsStorageService.emptyWords();
+  }
 }
