@@ -30,7 +30,7 @@ export class PlayContainerComponent implements OnInit {
   }
 
   onEnter(event: KeyboardEvent, value: string) {
-    if (event.keyCode === 13 && value !== '') {
+    if (event.key === 'Enter' && value !== '') {
       this.wordsStorageService.deleteWord(value);
       this.input = '';
     }
