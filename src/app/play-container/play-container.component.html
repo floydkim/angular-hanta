@@ -1,19 +1,25 @@
 <div id="container">
   <app-game-screen></app-game-screen>
-  <app-scoreboard></app-scoreboard>
-  <div id="div-typingarea">
-    <label>
-      <input
-        #inputbox
-        type="text"
-        [(ngModel)]="input"
-        (keydown)="onEnter($event, inputbox.value)"
-        placeholder="여기에 입력하세요!"
-        id="input-typing"
-        autofocus
-        style="ime-mode: active"/>
-    </label>
-    <button *ngIf="isPlaying" id="button-starter" routerLink="/main" (click)="onStop()">STOP</button>
-    <button *ngIf="!isPlaying" id="button-starter" (click)="onRestart()">RESTART</button>
+  <div id="div-panel">
+    <app-scoreboard></app-scoreboard>
+    <div id="div-typingarea">
+      <label>
+        <input
+          #inputbox
+          type="text"
+          [(ngModel)]="input"
+          (keydown)="onEnter($event, inputbox.value)"
+          placeholder="여기에 입력하세요!"
+          id="input-typing"
+          autofocus
+          style="ime-mode: active"/>
+      </label>
+      <button *ngIf="isPlaying" id="button-starter" (click)="onStop()" routerLink="/main">
+        STOP
+      </button>
+      <button *ngIf="!isPlaying" id="button-starter" (click)="onRestart()">
+        RESTART
+      </button>
+    </div>
   </div>
 </div>

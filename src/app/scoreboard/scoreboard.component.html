@@ -1,3 +1,4 @@
+<span class="indicator" [style.bottom.px]="scoreService.score * 10">🎈</span>
 <div id="div-scoreboard">
   <p *ngIf="scoreService.score > 0">점수: {{scoreService.score}}</p>
   <p *ngIf="scoreService.score <= 0" class="p-gameover">Game Over</p>

@@ -15,6 +15,14 @@ html, body {
   border-radius: 6px;
 }
 
+#div-panel {
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  position: relative;
+  z-index: 9;
+}
+
 #div-typingarea {
   width: 100%;
   display: flex;
